@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8" />
+  <title>Corporate Culture Monitor — Sprint 1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Playfair Display"', 'serif'],
+            body: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            ink: '#0a0a0a',
+            stone: '#6b7280',
+            line: '#e5e7eb',
+            pos: '#16a34a',
+            neg: '#dc2626',
+            accent: '#111827'
+          },
+          boxShadow: {
+            hair: '0 1px 0 0 rgba(17,24,39,.05)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .underline-tab { position: relative; }
+    .underline-tab::after{
+      content:""; position:absolute; left:0; bottom:-6px; height:1px; width:0;
+      background:#111827; transition:width .25s ease;
+    }
+    .underline-tab.active::after, .underline-tab:hover::after{ width:100%; }
+    /* 列表左侧细色条 */
+    .strip-pos  { box-shadow: inset 3px 0 0 0 rgba(22,163,74,.75); }
+    .strip-neg  { box-shadow: inset 3px 0 0 0 rgba(220,38,38,.75); }
+    .strip-neu  { box-shadow: inset 3px 0 0 0 rgba(107,114,128,.6); }
+  </style>
+</head>
+
+<body class="bg-white text-ink font-body">
+  <div class="mx-auto max-w-5xl px-6 md:px-8">
+
+    <!-- 顶部 -->
+    <header class="pt-10 pb-8 border-b border-line">
+      <h1 class="font-display text-4xl md:text-5xl tracking-tight leading-tight">
+        Corporate Culture Monitor
+      </h1>
+      <p class="mt-2 text-sm text-stone">Sprint 1</p>
+    </header>
+
+    <!-- KPI 区 -->
+    <section class="py-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="flex items-baseline justify-between border-b border-ink/10 pb-3">
+        <span class="uppercase tracking-wider text-xs text-stone">Total</span>
+        <span id="kpi-total" class="text-3xl font-semibold">-</span>
+      </div>
+      <div class="flex items-baseline justify-between border-b border-ink/10 pb-3">
+        <span class="uppercase tracking-wider text-xs text-stone">Positive</span>
+        <span id="kpi-pos" class="text-3xl font-semibold text-pos">-</span>
+      </div>
+      <div class="flex items-baseline justify-between border-b border-ink/10 pb-3">
+        <span class="uppercase tracking-wider text-xs text-stone">Negative</span>
+        <span id="kpi-neg" class="text-3xl font-semibold text-neg">-</span>
+      </div>
+    </section>
+
+
+    <section class="py-4 flex flex-col gap-4 md:flex-row md:items-end md:justify-between border-b border-line">
+      <div class="flex items-center gap-4">
+        <span class="text-sm text-stone">Sentiment</span>
+        <div id="seg-sent" class="flex gap-6">
+          <button data-val="all" class="underline-tab active text-sm">All</button>
+          <button data-val="positive" class="underline-tab text-sm">Positive</button>
+          <button data-val="negative" class="underline-tab text-sm">Negative</button>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3 text-sm">
+        <button id="btn-prev" class="px-3 py-1 border border-line rounded hover:bg-gray-50">👈 Prev</button>
+        <span id="page-info" class="text-stone">Page 1</span>
+        <button id="btn-next" class="px-3 py-1 border border-line rounded hover:bg-gray-50">Next 👉</button>
+      </div>
+    </section>
+
+    <main class="py-6">
+      <div id="list" class="divide-y divide-line">
+        <div class="py-12 text-center text-stone">Loading…</div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const seg = document.getElementById('seg-sent');
+    seg?.addEventListener('click', e=>{
+      const btn=e.target.closest('button'); if(!btn) return;
+      [...seg.querySelectorAll('button')].forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  </script>
+
+  <script src="./main.js"></script>
+</body>
+</html>
