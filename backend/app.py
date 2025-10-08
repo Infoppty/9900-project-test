@@ -1,5 +1,4 @@
-# 启动 Flask 服务器并提供前端访问数据的接口 (API)
-
+# Launch Flask server and provide API endpoints for frontend data access
 
 from flask import Flask, jsonify, request, abort
 from flask_cors import CORS
@@ -9,74 +8,144 @@ from pathlib import Path
 app = Flask(__name__)
 CORS(app)
 
-# 路径配置
-ROOT_DIR = Path(__file__).resolve().parents[1]
+# -------- Path Configuration --------
+ROOT_DIR = Path(__file__).resolve().parents[1]  # one level above backend/ is the project root
 DATA_DIR = ROOT_DIR / "data"
 PROC_DIR = DATA_DIR / "processed"
 ANNOTATED_CSV = PROC_DIR / "annotated.csv"
 
 
-# ---------- 工具函数 ----------
-def load_annotated():
-    """加载 annotated.csv 并返回 DataFrame"""
-    if not ANNOTATED_CSV.exists():
-        abort(404, description="annotated.csv not found. Please run pipeline first.")
-    df = pd.read_csv(ANNOTATED_CSV)
-    if "sentiment" not in df.columns or "text" not in df.columns:
+# -------- Utility Functions --------
+def _normalize(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Normalize key columns and types:
+    - `sentiment` and `text` must exist
+    - Support both `dimension` and `dimensions` (if neither exists, create an empty column)
+    """
+    m = {c.lower(): c for c in df.columns}
+    if "sentiment" not in m or "text" not in m:
         abort(500, description="annotated.csv missing required columns: sentiment or text")
-    df["sentiment"] = df["sentiment"].fillna("").str.lower()
+
+    # Required columns
+    df["sentiment"] = df[m["sentiment"]].fillna("").astype(str).str.lower()
+    df["text"] = df[m["text"]].fillna("").astype(str)
+
+    # Dimension column: support both names
+    if "dimension" in m:
+        df["dimension"] = df[m["dimension"]].fillna("").astype(str)
+    elif "dimensions" in m:
+        df["dimension"] = df[m["dimensions"]].fillna("").astype(str)
+    else:
+        df["dimension"] = ""
+
+    # Optional columns fallback
+    if "id" in m:
+        df["id"] = pd.to_numeric(df[m["id"]], errors="coerce")
+    if "year" in m:
+        df["year"] = pd.to_numeric(df[m["year"]], errors="coerce")
+    if "region" in m:
+        df["region"] = df[m["region"]].fillna("").astype(str)
+    if "source" in m:
+        df["source"] = df[m["source"]].fillna("").astype(str)
+
     return df
 
 
-# ---------- 基础路由 ----------
+def load_annotated() -> pd.DataFrame:
+    """Read processed/annotated.csv and normalize it"""
+    if not ANNOTATED_CSV.exists():
+        abort(404, description="annotated.csv not found. Please run the data pipeline first.")
+    df = pd.read_csv(ANNOTATED_CSV)
+    return _normalize(df)
+
+
+def filter_by_dimension(df: pd.DataFrame, dimension: str) -> pd.DataFrame:
+    """
+    Filter by dimension (case-insensitive, support multiple values separated by ';')
+    - No filtering if `dimension` is 'All' or empty
+    """
+    if not dimension or dimension.lower() == "all":
+        return df
+    want = dimension.lower()
+    return df[df["dimension"].astype(str).str.lower().apply(
+        lambda s: want in [x.strip() for x in s.split(";")] if s else False
+    )]
+
+
+# -------- Basic Routes --------
 @app.get("/health")
 def health():
-    """健康检查"""
+    """Health check endpoint"""
     return jsonify({"ok": True})
 
 
+# -------- Business Routes --------
 @app.get("/api/reviews")
 def api_reviews():
     """
-    获取评论列表，支持按 sentiment 过滤
-    query 参数:
-      sentiment=all|positive|negative (默认: all)
+    Get review list with support for filtering by sentiment and dimension + pagination.
+    Query params:
+      sentiment = all | positive | negative | neutral (default: all)
+      dimension = All or one of the defined dimensions (default: All)
+      page, size = pagination (default: 1, 10; max size: 100)
     """
     df = load_annotated()
 
     sentiment = (request.args.get("sentiment") or "all").lower()
-    if sentiment in ["positive", "negative"]:
-        df = df[df["sentiment"] == sentiment]
-    # 如果是 all 或空，则不过滤
+    dimension = request.args.get("dimension") or "All"
 
-    # 分页（可选）
+    # Dimension filter
+    df = filter_by_dimension(df, dimension)
+
+    # Sentiment filter
+    if sentiment in {"positive", "negative", "neutral"}:
+        df = df[df["sentiment"] == sentiment]
+
+    # Pagination
     try:
         page = max(1, int(request.args.get("page", 1)))
-        size = min(100, max(1, int(request.args.get("size", 50))))
-    except ValueError:
-        page, size = 1, 50
+        size = min(100, max(1, int(request.args.get("size", 10))))
+    except Exception:
+        page, size = 1, 10
+
     start, end = (page - 1) * size, (page - 1) * size + size
+    page_df = df.iloc[start:end].copy()
 
-    records = df[["id", "text", "sentiment"]].iloc[start:end].to_dict(orient="records")
+    # Build response
+    def to_item(row):
+        return {
+            "id": int(row["id"]) if "id" in row and pd.notna(row["id"]) else None,
+            "text": row["text"],
+            "sentiment": row["sentiment"],
+            "dimension": row.get("dimension", ""),
+            "source": row.get("source", ""),
+            "region": row.get("region", ""),
+            "year": int(row["year"]) if "year" in row and pd.notna(row["year"]) else None,
+        }
 
+    items = [to_item(r) for _, r in page_df.iterrows()]
     return jsonify({
         "total": int(len(df)),
         "page": page,
         "size": size,
-        "items": records
+        "items": items
     })
 
 
 @app.get("/api/kpis")
 def api_kpis():
     """
-    返回评论统计信息：
-    - total 总评论数
-    - positive_count 正面数
-    - negative_count 负面数
+    Return KPI counts (eNPS is calculated on the frontend).
+    Optional query:
+      dimension = All or one of the defined dimensions
+    Response:
+      total, positive_count, negative_count
     """
     df = load_annotated()
-    total = len(df)
+    dimension = request.args.get("dimension") or "All"
+    df = filter_by_dimension(df, dimension)
+
+    total = int(len(df))
     pos = int((df["sentiment"] == "positive").sum())
     neg = int((df["sentiment"] == "negative").sum())
 
@@ -86,11 +155,10 @@ def api_kpis():
         "negative_count": neg
     })
 
-# ---------- Sprint 2/3 ----------
 
+# -------- Reserved: Sprint 2/3 future endpoints --------
 
-
-# ---------- Sprint 2/3 ----------
 
 if __name__ == "__main__":
+    # Use 0.0.0.0 for container or LAN access; for local testing visit http://localhost:5000
     app.run(host="0.0.0.0", port=5000, debug=True)
