@@ -7,10 +7,10 @@ capstone-project-25t3-9900-f18a-donut/<br>
 │   └─ data_cleaning.py       &emsp;# Clean raw data -> reviews.csv / 清洗原始数据 -> reviews.csv<br>
 │<br>
 ├─ data/<br>
-│   ├─ raw/                   &emsp;# Raw scraped data / 原始爬取数据<br>
+│   ├─ raw/                   &emsp;# Raw scraped data / 经处理后的原始爬取数据<br>
 │   │   └─ reviews.csv<br>
 │   └─ processed/<br>
-│       └─ annotated.csv      &emsp;# ✅ Annotated data (simulated for Sprint 1) / ✅ 标注数据（Sprint 1 使用仿真数据）<br>
+│       └─ annotated.csv      &emsp;# ✅ Annotated data (simulated for Sprint 1) / ✅ 标注数据（目前为仿真数据）<br>
 │
 ├─ backend/<br>
 │   ├─ app.py                 &emsp;# 🚀 Flask API server (KPI + Reviews) / Flask 后端 API（KPI + 评论数据）<br>
@@ -19,7 +19,7 @@ capstone-project-25t3-9900-f18a-donut/<br>
 └─ frontend/<br>
     ├─ index.html             &emsp;# Entry point with Tailwind & fonts / 前端入口文件<br>
     ├─ src/<br>
-    │   ├─ App.jsx            &emsp;# Main React app with dynamic background / React 主应用（含动态背景）<br>
+    │   ├─ App.jsx            &emsp;# Main React app with dynamic background / React 主应用<br>
     │   ├─ components/        &emsp;# Modularized UI components / 前端组件<br>
     │   │   ├─ Header.jsx<br>
     │   │   ├─ KpiCards.jsx<br>
