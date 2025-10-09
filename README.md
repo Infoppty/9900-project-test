@@ -46,6 +46,7 @@ python backend/app.py              &emsp;# Step 4: Launch Flask API / 启动 Fla
 cd backend<br>
 python -m venv .venv<br>
 .venv\Scripts\activate   &emsp;# (Windows)<br>
+source .venv/bin/activate    &emsp;# (Mac)<br>
 pip install -r requirements.txt<br>
 python app.py<br>
 
