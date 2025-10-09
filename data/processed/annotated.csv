@@ -99,3 +99,23 @@ id,region,year,text,sentiment,dimension
 98,Australia,2025-04,"Very siloed and poor culture in HR and no development paths.",Negative,Leadership
 99,Australia,2025-04,"Rio Tinto pastoral stations conditions on the ground were nowhere near safe working standards. Unsafe work conditions and equipment and many Psychosocial hazards.",Negative,Respect
 100,Australia,2025-04,"Fantastic benefits with generous pay, generally good living conditions at camp, and plenty of opportunities for both upward and lateral career mobility.",Positive,Recognition
+101,Australia,2025-08,"Cross-department collaboration has improved a lot recently, and communication is open and transparent. F",Positive,Collaboration
+102,USA,2025-06,"Sometimes departments still work in silos despite efforts to promote teamwork. F",Negative,Collaboration
+103,Canada,2025-07,"The company celebrates cultural differences and encourages employees to share their backgrounds. F",Positive,Diversity
+104,Singapore,2025-09,"Diversity is discussed often, but senior roles still lack representation from minorities. F",Negative,Diversity
+105,UK,2025-08,"Inclusive hiring practices make everyone feel valued regardless of background. F",Positive,Inclusion
+106,Australia,2025-04,"Some managers still exclude quiet voices in decision-making, limiting inclusion. F",Negative,Inclusion
+107,South Africa,2025-06,"The workplace gives me a strong sense of belonging, like part of a family. F",Positive,Belonging
+108,USA,2025-09,"Frequent reorganizations make it hard to feel truly part of the company community. F",Negative,Belonging
+109,Canada,2025-07,"Innovation labs let employees test new ideas freely, fostering creativity. F",Positive,Innovation
+110,Australia,2025-08,"Too many procedures slow down innovation and discourage experimentation. F",Negative,Innovation
+111,UK,2025-09,"Leadership team genuinely listens to feedback and communicates changes clearly. F",Positive,Leadership
+112,USA,2025-05,"Senior management often ignores field feedback, leading to poor morale. F",Negative,Leadership
+113,Singapore,2025-03,"Employees are regularly recognized in monthly meetings, which boosts motivation. F",Positive,Recognition
+114,Canada,2025-04,"Lack of acknowledgment for hard work leaves employees feeling invisible. F",Negative,Recognition
+115,Australia,2025-09,"The company culture encourages respect and empathy across all teams. F",Positive,Respect
+116,UK,2025-07,"Some leaders still show favoritism, which erodes respect among staff. F",Negative,Respect
+117,South Africa,2025-06,"Innovation is part of our DNA, and everyone can contribute ideas regardless of title. F",Positive,Innovation
+118,USA,2025-04,"Leadership turnover creates instability, affecting trust and direction. F",Negative,Leadership
+119,Singapore,2025-08,"The workplace provides diversity events that foster inclusion and mutual respect. F",Positive,Diversity
+120,Canada,2025-09,"Recognition programs feel inconsistent; only top performers are highlighted. F",Negative,Recognition
