@@ -6,7 +6,7 @@ capstone-project-25t3-9900-f18a-donut/<br>
 │<br>
 ├─ crawler/&emsp;&emsp;&emsp;&emsp;  &emsp;&emsp; &emsp; &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;# Data collection & cleaning<br>
 │&emsp;├─ crawler.py&emsp;&emsp;  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;# Scrape comments from Reddit, Twitter<br>
-│&emsp;└─ data_cleaning.py&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;# Clean raw data -> reviews.csv<br>
+│&emsp;└─ data_cleaning.py&emsp; &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;# Clean raw data -> reviews.csv<br>
 │<br>
 ├─ data/<br>
 │&emsp;├─ raw/&emsp;  &emsp;   &emsp;  &emsp;  &emsp;  &emsp;&emsp;    &emsp;&emsp;&emsp;&emsp;&emsp;# Raw scraped data<br>
@@ -14,7 +14,7 @@ capstone-project-25t3-9900-f18a-donut/<br>
 │&emsp;└─ processed/<br>
 │&emsp;&emsp;&emsp;└─ annotated.csv/&emsp;  &emsp;&emsp;  &emsp;  &emsp;&emsp;# Annotated data (simulated for Sprint 1)<br>
 ├─ backend/<br>
-│&emsp;├─ app.py&emsp;  &emsp;   &emsp;  &emsp;  &emsp;  &emsp; &emsp;&emsp;&emsp;&emsp;&emsp;# Flask API server (KPI + Reviews) <br>
+│&emsp;├─ app.py&emsp;  &emsp;   &emsp;  &emsp;  &emsp;  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;# Flask API server (KPI + Reviews) <br>
 │&emsp;└─ pipeline.py &emsp; &emsp;   &emsp;  &emsp;  &emsp;&emsp; &emsp;&emsp;&emsp;# Sentiment labeling + dimension classification<br>
 │<br>
 └─ frontend/<br>
@@ -23,7 +23,7 @@ capstone-project-25t3-9900-f18a-donut/<br>
 │&emsp;│&emsp;├─ App.jsx&emsp; &emsp;   &emsp;  &emsp;  &emsp;&emsp;&emsp; &emsp; &emsp;# Main React app with dynamic background<br>
 │&emsp;│&emsp;├─ index.css&emsp;&emsp;   &emsp;  &emsp;  &emsp;&emsp;&emsp;&emsp;&emsp;# Global stylesheet, imports Tailwind & custom styles<br>
 │&emsp;│&emsp;├─ main.jsx&emsp; &emsp;   &emsp;  &emsp;  &emsp;&emsp;&emsp;&emsp;&emsp;# React app entry file that mounts <App /> into #root<br>
-│&emsp;│&emsp;├─ components/&emsp; &emsp;   &emsp;  &emsp;  &emsp; &emsp;# Modularized UI components<br>
+│&emsp;│&emsp;├─ components/&emsp; &emsp;   &emsp;  &emsp;  &emsp; &emsp; # Modularized UI components<br>
 │&emsp;│&emsp;│&emsp;├─ Header.jsx<br>
 │&emsp;│&emsp;│&emsp;├─ KpiCards.jsx<br>
 │&emsp;│&emsp;│&emsp;├─ SentimentTabs.jsx<br>
