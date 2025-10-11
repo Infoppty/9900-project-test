@@ -15,7 +15,7 @@ capstone-project-25t3-9900-f18a-donut/<br>
 │&emsp;&emsp;&emsp;└─ annotated.csv/&emsp;  &emsp;&emsp;  &emsp;  &emsp;&emsp;# Annotated data (simulated for Sprint 1)<br>
 ├─ backend/<br>
 │&emsp;├─ app.py&emsp;  &emsp;   &emsp;  &emsp;  &emsp;  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;# Flask API server (KPI + Reviews) <br>
-│&emsp;└─ pipeline.py &emsp; &emsp;   &emsp;  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;# Sentiment labeling + dimension classification<br>
+│&emsp;└─ pipeline.py &emsp; &emsp;   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;# Sentiment labeling + dimension classification<br>
 │<br>
 └─ frontend/<br>
 │&emsp;├─ index.html&emsp;&emsp;   &emsp;  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;# Entry point with Tailwind & fonts <br>
