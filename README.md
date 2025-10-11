@@ -17,7 +17,7 @@ capstone-project-25t3-9900-f18a-donut/<br>
 │&emsp;├─ app.py&emsp;  &emsp;   &emsp;  &emsp;  &emsp;  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;# Flask API server (KPI + Reviews) <br>
 │&emsp;└─ pipeline.py &emsp;&emsp;   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;# Sentiment labeling + dimension classification<br>
 │<br>
-└─ frontend/<br>
+├─ frontend/<br>
 │&emsp;├─ index.html&emsp;&emsp;   &emsp;  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;# Entry point with Tailwind & fonts <br>
 │&emsp;├─ src/<br>
 │&emsp;│&emsp;├─ App.jsx&emsp; &emsp;   &emsp;  &emsp;  &emsp;&emsp;&emsp;&emsp; &emsp;# Main React app with dynamic background<br>
