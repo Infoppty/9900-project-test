@@ -30,8 +30,8 @@ capstone-project-25t3-9900-f18a-donut/<br>
 │&emsp;│&emsp;│&emsp;├─ DimensionFilter.jsx<br>
 │&emsp;│&emsp;│&emsp;├─ ReviewsList.jsx<br>
 │&emsp;│&emsp;│&emsp;└─ Pager.jsx<br>
-│&emsp;│&emsp;└─ api.js&emsp; &emsp;   &emsp;  &emsp;  &emsp;&emsp; &emsp;&emsp;&emsp;&emsp;# API helper functions<br>
-│&emsp;├─ main.jsx &emsp; &emsp;   &emsp;  &emsp;  &emsp; &emsp;&emsp;&emsp;&emsp;&emsp;# React root<br>
+│&emsp;│&emsp;└─ api.js&emsp; &emsp;   &emsp;  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;# API helper functions<br>
+│&emsp;├─ main.jsx &emsp; &emsp;   &emsp;  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;# React root<br>
 │&emsp;└─ tailwind.config.js<br>
 
 
