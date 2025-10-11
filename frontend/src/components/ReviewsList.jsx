@@ -29,7 +29,6 @@ export default function ReviewsList({ items, loading }) {
           <div className="flex items-center gap-3 mb-2">
             <Badge sent={r?.sentiment} />
             <span className="text-xs text-stone">#{r?.id ?? ""}</span>
-            {/* 👇 这里用单数字段 */}
             {r?.dimension && <span className="text-xs text-stone/80">• {r.dimension}</span>}
           </div>
           <div

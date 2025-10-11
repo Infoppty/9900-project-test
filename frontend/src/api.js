@@ -16,8 +16,7 @@ function buildDimsQuery({ dimension, mode } = {}) {
   return q;
 }
 
-// ---------------- Public APIs ----------------
-
+// Public API
 export const getKpis = ({ dimension, mode } = {}) => {
   const params = new URLSearchParams(buildDimsQuery({ dimension, mode }));
   const query = params.toString();
