@@ -19,4 +19,5 @@ build/
 
 *.log
 
+*.ipynb_checkpoints
 .ipynb_checkpoints/
