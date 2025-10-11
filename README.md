@@ -23,7 +23,7 @@ capstone-project-25t3-9900-f18a-donut/<br>
 │&emsp;│&emsp;├─ App.jsx&emsp; &emsp;   &emsp;  &emsp;  &emsp;&emsp;&emsp;&emsp; &emsp;# Main React app with dynamic background<br>
 │&emsp;│&emsp;├─ index.css&emsp;&emsp;   &emsp;  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;# Global stylesheet, imports Tailwind & custom styles<br>
 │&emsp;│&emsp;├─ main.jsx&emsp; &emsp;   &emsp;  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;# React app entry file that mounts <App /> into #root<br>
-│&emsp;│&emsp;├─ components/&emsp; &emsp;   &emsp;  &emsp;  &emsp; &emsp; # Modularized UI components<br>
+│&emsp;│&emsp;├─ components/ &emsp;  &emsp;  &emsp;  &emsp;  &emsp; # Modularized UI components<br>
 │&emsp;│&emsp;│&emsp;├─ Header.jsx<br>
 │&emsp;│&emsp;│&emsp;├─ KpiCards.jsx<br>
 │&emsp;│&emsp;│&emsp;├─ SentimentTabs.jsx<br>
